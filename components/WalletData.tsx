@@ -117,15 +117,45 @@ export default function WalletData({ data }: WalletDataProps) {
                 </div>
             </div>
 
-            {/* Related Accounts */}
-            <div className="glass-card p-6">
-                <div className="flex items-center space-x-3 mb-6">
-                    <Users className="h-6 w-6 text-neon-cyan" />
-                    <h3 className="text-xl font-bold text-white">Connected Wallets</h3>
-                    <span className="text-gray-400 text-sm">({data?.relatedAccounts?.length} accounts)</span>
-                </div>
+                   {/* Related Accounts */}
+       <div className="glass-card p-6">
+         <div className="flex items-center space-x-3 mb-6">
+           <Users className="h-6 w-6 text-neon-cyan" />
+           <h3 className="text-xl font-bold text-white">Connected Wallets</h3>
+           <span className="text-gray-400 text-sm">({data?.relatedAccounts?.length} accounts)</span>
+         </div>
 
-                <div className="grid gap-4">
+         {/* Summary Stats */}
+         <div className="mb-6 p-4 bg-white/5 rounded-lg border border-white/10">
+           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+             <div>
+               <p className="text-lg font-bold text-solana-green">
+                 {data?.relatedAccounts?.reduce((sum, acc) => sum + acc.transactionCount, 0)}
+               </p>
+               <p className="text-gray-400 text-xs">Total Interactions</p>
+             </div>
+             <div>
+               <p className="text-lg font-bold text-solana-blue">
+                 {data?.relatedAccounts?.reduce((sum, acc) => sum + acc.totalTokenInteractions, 0)}
+               </p>
+               <p className="text-gray-400 text-xs">Token Transfers</p>
+             </div>
+             <div>
+               <p className="text-lg font-bold text-neon-pink">
+                 {data?.relatedAccounts?.filter(acc => acc.transactionTypes.includes('SOL Inflow')).length}
+               </p>
+               <p className="text-gray-400 text-xs">SOL Receivers</p>
+             </div>
+             <div>
+               <p className="text-lg font-bold text-neon-cyan">
+                 {data?.relatedAccounts?.filter(acc => acc.transactionTypes.includes('SOL Outflow')).length}
+               </p>
+               <p className="text-gray-400 text-xs">SOL Senders</p>
+             </div>
+           </div>
+         </div>
+         
+         <div className="grid gap-4">
                     {data?.relatedAccounts?.map((account: RelatedAccount, index) => {
                         const { amount: solAmount, isInflow, isZero } = formatSolFlow(account.totalSolFlow)
 
@@ -222,35 +252,7 @@ export default function WalletData({ data }: WalletDataProps) {
                     })}
                 </div>
 
-                {/* Summary Footer */}
-                <div className="mt-6 pt-4 border-t border-white/10">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                        <div>
-                            <p className="text-lg font-bold text-solana-green">
-                                {data?.relatedAccounts?.reduce((sum, acc) => sum + acc.transactionCount, 0)}
-                            </p>
-                            <p className="text-gray-400 text-xs">Total Interactions</p>
-                        </div>
-                        <div>
-                            <p className="text-lg font-bold text-solana-blue">
-                                {data?.relatedAccounts?.reduce((sum, acc) => sum + acc.totalTokenInteractions, 0)}
-                            </p>
-                            <p className="text-gray-400 text-xs">Token Transfers</p>
-                        </div>
-                        <div>
-                            <p className="text-lg font-bold text-neon-pink">
-                                {data?.relatedAccounts?.filter(acc => acc.transactionTypes.includes('SOL Inflow')).length}
-                            </p>
-                            <p className="text-gray-400 text-xs">SOL Receivers</p>
-                        </div>
-                        <div>
-                            <p className="text-lg font-bold text-neon-cyan">
-                                {data?.relatedAccounts?.filter(acc => acc.transactionTypes.includes('SOL Outflow')).length}
-                            </p>
-                            <p className="text-gray-400 text-xs">SOL Senders</p>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     )
