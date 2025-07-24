@@ -34,7 +34,7 @@ export default function Home() {
     <>
       <Head>
         <title>Solana Wallet Tracker | Track Any Sol Address 🚀</title>
-        <meta name="description" content="Track Solana wallets, tokens, NFTs, and DeFi positions with real-time data" />
+        <meta name="description" content="Track Solana Wallets" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
