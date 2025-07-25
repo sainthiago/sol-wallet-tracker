@@ -121,7 +121,7 @@ export default function WalletData({ data }: WalletDataProps) {
        <div className="glass-card p-6">
          <div className="flex items-center space-x-3 mb-6">
            <Users className="h-6 w-6 text-neon-cyan" />
-           <h3 className="text-xl font-bold text-white">Connected Wallets</h3>
+           <h3 className="text-xl font-bold text-white">Related Wallets</h3>
            <span className="text-gray-400 text-sm">({data?.relatedAccounts?.length} accounts)</span>
          </div>
 
