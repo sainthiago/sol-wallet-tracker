@@ -9,22 +9,22 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        solana: {
-          purple: '#9945FF',
-          green: '#14F195',
-          blue: '#00D4FF',
-          dark: '#1A1A2E',
-          darker: '#16213E',
+        brand: {
+          purple: '#8B5CF6',
+          blue: '#06B6D4',
+          green: '#10B981',
+          orange: '#F59E0B',
+          red: '#EF4444',
         },
-        neon: {
-          green: '#39FF14',
-          pink: '#FF10F0',
-          cyan: '#00FFFF',
-          yellow: '#FFFF00',
+        surface: {
+          primary: '#1F1F23',
+          secondary: '#2A2A30',
+          tertiary: '#35353C',
         }
       },
       fontFamily: {
-        mono: ['JetBrains Mono', 'Monaco', 'Consolas', 'monospace'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        mono: ['SF Mono', 'Monaco', 'Consolas', 'monospace'],
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',

@@ -24,7 +24,7 @@ export default function WalletInput({ onSubmit, loading }: WalletInputProps) {
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                        <Wallet className='h-5 w-5 text-solana-purple' />
+                        <Wallet className='h-5 w-5 text-brand-blue' />
                     </div>
 
                     <input
@@ -35,7 +35,7 @@ export default function WalletInput({ onSubmit, loading }: WalletInputProps) {
                         className="w-full pl-12 pr-4 py-4 font-mono text-sm md:text-base
               glass-card placeholder-gray-400 text-white
               focus:outline-none focus:ring-2 transition-all duration-300
-                focus:ring-solana-purple border-white/20"
+                focus:ring-brand-blue border-gray-700"
                         disabled={loading}
                     />
 
@@ -50,8 +50,8 @@ export default function WalletInput({ onSubmit, loading }: WalletInputProps) {
             w-full py-4 px-6 rounded-xl font-mono font-semibold
             transition-all duration-300 flex items-center justify-center space-x-3
             ${loading || !address.trim()
-                            ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
-                            : 'bg-gradient-to-r from-solana-purple to-solana-green text-white glow-button neon-border'
+                            ? 'bg-gray-700 text-gray-400 cursor-not-allowed border-gray-700'
+                            : 'bg-gradient-to-r from-brand-purple to-brand-blue text-white subtle-button border-brand-purple'
                         }
           `}
                 >
@@ -80,7 +80,7 @@ export default function WalletInput({ onSubmit, loading }: WalletInputProps) {
                         <button
                             key={i}
                             onClick={() => handleAddressChange(example.address)}
-                            className="block w-full text-left text-xs font-mono text-gray-500 hover:text-solana-green transition-colors"
+                            className="block w-full text-left text-xs font-mono text-gray-500 hover:text-brand-blue transition-colors"
                             disabled={loading}
                         >
                             <span className="text-gray-400">{example.label}:</span> {example.address}
