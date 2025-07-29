@@ -1,3 +1,4 @@
+import { BubbleIcon } from '@/components/BubbleIcon'
 import BubbleMap from '@/components/BubbleMap'
 import WalletInput from '@/components/WalletInput'
 import { WalletData as IWalletData } from '@/types/wallet'
@@ -42,16 +43,25 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Solana Address Network | Bubble Map Visualization</title>
+        <title>Solana Bubbles | Interactive Address Network Visualization</title>
         <meta name="description" content="Visualize Solana address networks with interactive bubble maps" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/favicon.svg" />
       </Head>
 
       <main className="min-h-screen">
         <div className="container mx-auto px-4 py-8 max-w-6xl">
           {/* Header */}
           <div className="text-center mb-8">
+            <div className="flex items-center justify-center space-x-4 mb-4">
+              <BubbleIcon size={48} className="animate-pulse-slow" />
+              <h1 className="text-3xl md:text-5xl font-bold">
+                <span className="gradient-text">SOLANA</span>
+                <span className="text-white"> BUBBLES</span>
+              </h1>
+              <BubbleIcon size={48} className="animate-pulse-slow" />
+            </div>
             <p className="text-gray-400 text-base md:text-lg">
               Explore Solana address connections through interactive bubble maps
             </p>
@@ -86,7 +96,9 @@ export default function Home() {
           {loading && (
             <div className="mb-8">
               <div className="glass-card p-6 text-center">
-                <div className="animate-spin w-6 h-6 border-2 border-brand-blue border-t-transparent rounded-full mx-auto mb-3"></div>
+                <div className="flex justify-center mb-3">
+                  <BubbleIcon size={32} className="animate-pulse" />
+                </div>
                 <p className="text-gray-300 text-sm">Mapping address network...</p>
               </div>
             </div>
@@ -101,7 +113,7 @@ export default function Home() {
           {!walletData && !loading && !error && (
             <div className="text-center">
               <div className="glass-card p-6 max-w-md mx-auto">
-                <h3 className="text-white font-medium mb-2">How it works</h3>
+                <h3 className="text-white font-medium mb-4">How it works</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
                   Enter a Solana address to visualize its network connections.
                   Bubble sizes represent SOL volumes, colors indicate volume ranges.

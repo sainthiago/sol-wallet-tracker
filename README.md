@@ -1,4 +1,4 @@
-# Solana Address Network 🔗
+# Solana Bubbles 🫧
 
 A modern bubble map visualization tool for exploring Solana address networks. Visualize connections between addresses with interactive, scalable bubble charts.
 

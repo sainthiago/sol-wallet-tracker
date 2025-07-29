@@ -190,7 +190,7 @@ export default function BubbleMap({ data }: BubbleMapProps) {
       {/* Visualization */}
       <div className="glass-card p-4">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-white">Address Network</h3>
+          <h3 className="text-lg font-semibold text-white">Bubble Network</h3>
           <div className="flex items-center space-x-4 text-xs text-gray-400">
             <div className="flex items-center space-x-1">
               <div className="w-3 h-3 bg-brand-green rounded-full"></div>
