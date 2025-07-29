@@ -8,15 +8,35 @@ interface WalletInputProps {
 
 export default function WalletInput({ onSubmit, loading }: WalletInputProps) {
     const [address, setAddress] = useState('')
+    const [isValid, setIsValid] = useState(true)
 
+    const validateSolanaAddress = (addr: string): boolean => {
+        // Basic Solana address validation (base58, 32-44 chars)
+        const base58Regex = /^[A-HJ-NP-Z1-9]{32,44}$/
+        return base58Regex.test(addr)
+    }
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
+
+        if (!address.trim()) {
+            setIsValid(false)
+            return
+        }
+
+        // Basic client-side validation
+        if (!validateSolanaAddress(address.trim())) {
+            setIsValid(false)
+            return
+        }
+
+        setIsValid(true)
         onSubmit(address.trim())
     }
 
     const handleAddressChange = (value: string) => {
         setAddress(value)
+        if (!isValid) setIsValid(true) // Reset validation state when user types
     }
 
     return (
@@ -32,15 +52,28 @@ export default function WalletInput({ onSubmit, loading }: WalletInputProps) {
                         value={address}
                         onChange={(e) => handleAddressChange(e.target.value)}
                         placeholder="Enter Solana wallet address (e.g., 11111111111111111111111111111112)"
-                        className="w-full pl-12 pr-4 py-4 font-mono text-sm md:text-base
+                        className={`w-full pl-12 pr-4 py-4 font-mono text-sm md:text-base
               glass-card placeholder-gray-400 text-white
               focus:outline-none focus:ring-2 transition-all duration-300
-                focus:ring-brand-blue border-gray-700"
+              ${isValid
+                                ? 'focus:ring-brand-blue border-gray-700'
+                                : 'border-brand-red/50 focus:ring-brand-red'
+                            }`}
                         disabled={loading}
                     />
 
-
+                    {!isValid && (
+                        <div className="absolute inset-y-0 right-0 pr-4 flex items-center">
+                            <span className="text-brand-red text-sm">❌</span>
+                        </div>
+                    )}
                 </div>
+                
+                {!isValid && (
+                    <p className="text-brand-red text-sm ml-1">
+                        Please enter a valid Solana address (32-44 characters, base58 format)
+                    </p>
+                )}
 
 
                 <button
@@ -58,36 +91,17 @@ export default function WalletInput({ onSubmit, loading }: WalletInputProps) {
                     {loading ? (
                         <>
                             <div className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full"></div>
-                            <span>Tracking...</span>
+                            <span>Mapping...</span>
                         </>
                     ) : (
                         <>
                             <Search className="h-5 w-5" />
-                            <span>TRACK WALLET</span>
+                            <span>MAP NETWORK</span>
                         </>
                     )}
                 </button>
             </form>
 
-            {/* Example addresses */}
-            <div className="mt-6 p-4 glass-card">
-                <p className="text-gray-400 text-xs font-mono mb-2">Try these example addresses:</p>
-                <div className="space-y-1">
-                    {[
-                        { label: 'Solana Foundation', address: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v' },
-                        { label: 'Random Wallet', address: '11111111111111111111111111111112' }
-                    ].map((example, i) => (
-                        <button
-                            key={i}
-                            onClick={() => handleAddressChange(example.address)}
-                            className="block w-full text-left text-xs font-mono text-gray-500 hover:text-brand-blue transition-colors"
-                            disabled={loading}
-                        >
-                            <span className="text-gray-400">{example.label}:</span> {example.address}
-                        </button>
-                    ))}
-                </div>
-            </div>
         </div>
     )
 } 

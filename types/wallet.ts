@@ -2,18 +2,12 @@
 export interface WalletData {
   address: string;
   isValid: boolean;
-  totalTransactions: number;
-  sampledTransactions: number;
   relatedAccounts: RelatedAccount[];
 }
 
 export interface RelatedAccount {
   address: string;
-  transactionCount: number;
-  lastInteraction: string; // ISO date string
-  transactionTypes: string[];
-  totalSolFlow: string; // e.g., "0.002 SOL"
-  totalTokenInteractions: number;
+  totalSolVolume: string; // e.g., "9.74 SOL", "0 SOL"
 }
 
 // Legacy interfaces for backward compatibility

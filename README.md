@@ -1,24 +1,24 @@
-# Solana Wallet Tracker 🚀
+# Solana Address Network 🔗
 
-A modern, responsive web application for tracking Solana wallets with a degen-friendly design. Track tokens, NFTs, transactions, and DeFi positions for any Solana address.
+A modern bubble map visualization tool for exploring Solana address networks. Visualize connections between addresses with interactive, scalable bubble charts.
 
 ## Features
 
-- 🔍 **Wallet Analysis**: Track any Solana wallet address
-- 💰 **Token Holdings**: View all token balances and values
-- 🎨 **NFT Collection**: Display NFT holdings with images
-- 📊 **Transaction History**: Recent transaction details
-- 🏦 **DeFi Positions**: Lending, borrowing, and staking positions
+- 🎨 **Interactive Bubble Maps**: D3.js powered visualizations
+- 📏 **Size-based Mapping**: Bubble sizes represent SOL amounts
+- 🎯 **Color-coded Types**: Visual distinction for transaction types
+- 🔍 **Interactive Details**: Click bubbles for detailed information
+- ⚡ **Zoom & Pan**: Explore large networks with smooth navigation
 - 📱 **Responsive Design**: Works on desktop and mobile
-- ⚡ **Real-time Data**: Powered by Solana Wallet Tracker Agent
+- 🔗 **Real-time Data**: Powered by Solana Wallet Tracker Agent
 
 ## Tech Stack
 
 - **Next.js 15** - React framework
 - **TypeScript** - Type safety
-- **Tailwind CSS** - Styling with custom Solana theme
+- **D3.js** - Data visualization and force simulation
+- **Tailwind CSS** - Styling with professional theme
 - **Lucide React** - Beautiful icons
-- **Axios** - HTTP client
 
 ## Getting Started
 
@@ -38,13 +38,14 @@ A modern, responsive web application for tracking Solana wallets with a degen-fr
 ## Usage
 
 1. Enter a Solana wallet address in the input field
-2. Click "TRACK WALLET" to fetch data
-3. View comprehensive wallet information including:
-   - SOL balance
-   - Token holdings
-   - NFT collection
-   - Recent transactions
-   - DeFi positions
+2. Click "MAP NETWORK" to fetch and visualize data
+3. Explore the interactive bubble map:
+   - Main address appears as purple bubble in center
+   - Related addresses shown as colored bubbles
+   - Bubble size represents SOL volume for each address
+   - Colors indicate volume ranges (green=high, orange=medium, blue=low, gray=zero)
+   - Click bubbles to see detailed information
+   - Drag to pan, scroll to zoom
 
 ## Example Addresses
 
@@ -57,14 +58,15 @@ Try these example Solana addresses:
 This app connects to the Solana Wallet Tracker Agent at:
 `https://solana-wallet-tracker-agent.vercel.app/`
 
-## Design Philosophy
+## Visualization Features
 
-The UI is designed for "Solana degens" with:
-- 🎨 Neon color schemes (purple, green, cyan, pink)
-- ⚡ Glowing animations and effects
-- 🖥️ Monospace fonts for a technical feel
-- 🌌 Dark gradient backgrounds
-- 💎 Glass morphism cards
+The bubble map provides:
+- 🎯 **Force Simulation**: Natural bubble positioning with physics
+- 📊 **Proportional Sizing**: Bubble radius based on SOL amounts
+- 🎨 **Type-based Coloring**: Instant visual categorization
+- 🔍 **Interactive Selection**: Click for detailed information
+- 🚀 **Smooth Animations**: 60fps rendering with D3.js
+- 📱 **Responsive Layout**: Scales to any screen size
 
 ## Scripts
 
