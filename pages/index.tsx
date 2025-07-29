@@ -23,12 +23,12 @@ export default function Home() {
       }
 
       const walletData = data.data || data
-      
+
       // Check if wallet is valid
       if (!walletData.isValid) {
         throw new Error('Invalid Solana address - wallet does not exist or is malformed')
       }
-      
+
       setWalletData(walletData)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred while fetching wallet data')
@@ -52,10 +52,6 @@ export default function Home() {
         <div className="container mx-auto px-4 py-8 max-w-6xl">
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-5xl font-bold mb-3">
-              <span className="gradient-text">ADDRESS</span>
-              <span className="text-white"> NETWORK</span>
-            </h1>
             <p className="text-gray-400 text-base md:text-lg">
               Explore Solana address connections through interactive bubble maps
             </p>
@@ -106,8 +102,8 @@ export default function Home() {
             <div className="text-center">
               <div className="glass-card p-6 max-w-md mx-auto">
                 <h3 className="text-white font-medium mb-2">How it works</h3>
-                                <p className="text-gray-400 text-sm leading-relaxed">
-                  Enter a Solana address to visualize its network connections. 
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Enter a Solana address to visualize its network connections.
                   Bubble sizes represent SOL volumes, colors indicate volume ranges.
                 </p>
               </div>

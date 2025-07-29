@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { RelatedAccount, WalletData } from '@/types/wallet'
 import * as d3 from 'd3'
-import { WalletData, RelatedAccount } from '@/types/wallet'
 import { Copy, ExternalLink } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 
 interface BubbleMapProps {
   data: WalletData
@@ -85,7 +85,7 @@ export default function BubbleMap({ data }: BubbleMapProps) {
     const simulation = d3.forceSimulation(nodes)
       .force('charge', d3.forceManyBody().strength(-100))
       .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide().radius(d => (d as BubbleNode).isMain ? 50 : sizeScale((d as BubbleNode) .solAmount) + 2))
+      .force('collision', d3.forceCollide().radius(d => (d as BubbleNode).isMain ? 50 : sizeScale((d as BubbleNode).solAmount) + 2))
 
     // Create SVG
     svg
@@ -123,18 +123,18 @@ export default function BubbleMap({ data }: BubbleMapProps) {
       .attr('stroke', '#1F2937')
       .attr('stroke-width', 2)
       .style('opacity', 0.8)
-      .on('mouseover', function(event, d) {
+      .on('mouseover', function (event, d) {
         d3.select(this)
           .style('opacity', 1)
           .attr('stroke-width', 3)
         setSelectedNode(d)
       })
-      .on('mouseout', function(event, d) {
+      .on('mouseout', function (event, d) {
         d3.select(this)
           .style('opacity', 0.8)
           .attr('stroke-width', 2)
       })
-      .on('click', function(event, d) {
+      .on('click', function (event, d) {
         setSelectedNode(d)
       })
 
@@ -163,7 +163,7 @@ export default function BubbleMap({ data }: BubbleMapProps) {
     }
   }, [data])
 
-  if (!data?.isValid) {
+  if (!data?.isValid && data?.address) {
     return (
       <div className="w-full h-96 flex items-center justify-center">
         <div className="text-center">
@@ -210,11 +210,11 @@ export default function BubbleMap({ data }: BubbleMapProps) {
             </div>
           </div>
         </div>
-        
+
         <div className="w-full overflow-hidden rounded-lg bg-gray-900/30">
           <svg ref={svgRef} className="w-full"></svg>
         </div>
-        
+
         <p className="text-xs text-gray-500 mt-2 text-center">
           Bubble size represents SOL volume • Click and drag to pan • Scroll to zoom
         </p>
@@ -244,7 +244,7 @@ export default function BubbleMap({ data }: BubbleMapProps) {
               </a>
             </div>
           </div>
-          
+
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
               <p className="text-gray-400">Address</p>
