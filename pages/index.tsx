@@ -47,7 +47,7 @@ export default function Home() {
         <meta name="description" content="Visualize Solana address networks with interactive bubble maps" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/favicon.svg" />
+        <link rel="favicon" href="/favicon.svg" />
       </Head>
 
       <main className="min-h-screen">
