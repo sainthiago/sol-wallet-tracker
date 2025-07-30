@@ -138,11 +138,13 @@ export default function BubbleMap({ data }: BubbleMapProps) {
         }
         setSelectedNode(nodeData)
       })
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .on('mouseout', function (event, d) {
         d3.select(this)
           .style('opacity', 0.8)
           .attr('stroke-width', 2)
       })
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .on('click', function (event, d) {
         // Extract only the essential data to avoid D3 simulation interference
         const nodeData = {
