@@ -1,14 +1,23 @@
 import { Search, Wallet } from 'lucide-react'
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 
 interface WalletInputProps {
     onSubmit: (address: string) => void
     loading: boolean
+    defaultValue?: string
 }
 
-export default function WalletInput({ onSubmit, loading }: WalletInputProps) {
-    const [address, setAddress] = useState('')
+export default function WalletInput({ onSubmit, loading, defaultValue = '' }: WalletInputProps) {
+    const [address, setAddress] = useState(defaultValue)
     const [isValid, setIsValid] = useState(true)
+
+    // Update address when defaultValue changes (for URL navigation)
+    useEffect(() => {
+        setAddress(defaultValue)
+        if (defaultValue) {
+            setIsValid(true)
+        }
+    }, [defaultValue])
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()

@@ -202,7 +202,7 @@ export default function BubbleMap({ data }: BubbleMapProps) {
                 {copiedAddress === selectedNode.address ? '✓' : <Copy className="h-4 w-4" />}
               </button>
               <a
-                href={`https://explorer.solana.com/address/${selectedNode.address}`}
+                href={`https://solscan.io/address/${selectedNode.address}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-brand-blue transition-colors"

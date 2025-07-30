@@ -1,41 +1,20 @@
-import BubbleMap from '@/components/BubbleMap'
 import { BubbleIcon } from '@/components/BubbleIcon'
 import WalletInput from '@/components/WalletInput'
-import { WalletData as IWalletData } from '@/types/wallet'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { useCallback, useState } from 'react'
 
 export default function Home() {
+  const router = useRouter()
   const [showHomescreen, setShowHomescreen] = useState(true)
-  const [walletData, setWalletData] = useState<IWalletData | null>(null)
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
 
   const handleWalletSubmit = useCallback(async (address: string) => {
     setLoading(true)
-    setError(null)
-    setWalletData(null)
-
-    try {
-      const response = await fetch(`/api/wallet/${address}`)
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to fetch wallet data')
-      }
-
-      const walletData = data.data || data
-      if (!walletData.isValid) {
-        throw new Error('Invalid Solana address - wallet does not exist or is malformed')
-      }
-
-      setWalletData(walletData)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred while fetching wallet data')
-    } finally {
-      setLoading(false)
-    }
-  }, [])
+    // Navigate to the wallet page
+    await router.push(`/${address}`)
+    setLoading(false)
+  }, [router])
 
   const handleHomescreenClick = () => {
     setShowHomescreen(false)
@@ -113,56 +92,20 @@ export default function Home() {
               />
             </div>
 
-            {/* Error Display */}
-            {error && (
-              <div className="mb-8">
-                <div className="glass-card p-4 border-brand-red/50 bg-brand-red/5">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-5 h-5 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
-                      <span className="text-white text-xs font-bold">!</span>
-                    </div>
-                    <div>
-                      <p className="text-brand-red font-medium text-sm">Validation Error</p>
-                      <p className="text-red-300 text-sm">{error}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Loading State */}
-            {loading && (
-              <div className="mb-8">
-                <div className="glass-card p-6 text-center">
-                  <div className="flex justify-center mb-3">
-                    <BubbleIcon size={32} className="animate-pulse" />
-                  </div>
-                  <p className="text-gray-300 text-sm">Mapping address network...</p>
-                </div>
-              </div>
-            )}
-
-            {/* Bubble Map Visualization */}
-            {walletData && (
-              <BubbleMap data={walletData} />
-            )}
-
             {/* Instructions */}
-            {!walletData && !loading && !error && (
-              <div className="text-center">
-                <div className="glass-card p-6 max-w-md mx-auto">
-                  <div className="flex items-center justify-center space-x-2 mb-3">
-                    <BubbleIcon size={24} />
-                    <h3 className="text-white font-medium">How it works</h3>
-                    <BubbleIcon size={24} />
-                  </div>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    Enter a Solana address to visualize its network connections.
-                    Bubble sizes represent SOL volumes, colors indicate volume ranges.
-                  </p>
+            <div className="text-center">
+              <div className="glass-card p-6 max-w-md mx-auto">
+                <div className="flex items-center justify-center space-x-2 mb-3">
+                  <BubbleIcon size={24} />
+                  <h3 className="text-white font-medium">How it works</h3>
+                  <BubbleIcon size={24} />
                 </div>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Enter a Solana address to visualize its network connections.
+                  Bubble sizes represent SOL volumes, colors indicate volume ranges.
+                </p>
               </div>
-            )}
+            </div>
           </div>
         </div>
       </main>
