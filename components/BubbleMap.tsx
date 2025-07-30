@@ -124,7 +124,7 @@ export default function BubbleMap({ data }: BubbleMapProps) {
       .attr('stroke', '#1F2937')
       .attr('stroke-width', 2)
       .style('opacity', 0.8)
-      .on('mouseover', function(event, d) {
+      .on('mouseover', function (event, d) {
         d3.select(this)
           .style('opacity', 1)
           .attr('stroke-width', 3)
@@ -138,13 +138,12 @@ export default function BubbleMap({ data }: BubbleMapProps) {
         }
         setSelectedNode(nodeData)
       })
-      .on('mouseout', function(event, d) {
+      .on('mouseout', function (event, d) {
         d3.select(this)
           .style('opacity', 0.8)
           .attr('stroke-width', 2)
       })
-      .on('click', function(event, d) {
-        console.log('Clicked node data:', d)
+      .on('click', function (event, d) {
         // Extract only the essential data to avoid D3 simulation interference
         const nodeData = {
           id: d.id,
@@ -153,7 +152,6 @@ export default function BubbleMap({ data }: BubbleMapProps) {
           label: d.label,
           isMain: d.isMain
         }
-        console.log('Setting selectedNode to:', nodeData)
         setSelectedNode(nodeData)
       })
 
@@ -203,8 +201,6 @@ export default function BubbleMap({ data }: BubbleMapProps) {
       </div>
     )
   }
-
-  console.log({ selectedNode })
 
   return (
     <div className="w-full space-y-4">
