@@ -54,8 +54,7 @@ export default function BubbleMap({ data }: BubbleMapProps) {
     svg.selectAll('*').remove()
 
     const width = 800
-    const height = 300
-    const margin = 40
+    const height = 400
 
     // Prepare data
     const nodes: BubbleNode[] = [
@@ -123,18 +122,18 @@ export default function BubbleMap({ data }: BubbleMapProps) {
       .attr('stroke', '#1F2937')
       .attr('stroke-width', 2)
       .style('opacity', 0.8)
-      .on('mouseover', function (event, d) {
+      .on('mouseover', function (d) {
         d3.select(this)
           .style('opacity', 1)
           .attr('stroke-width', 3)
         setSelectedNode(d)
       })
-      .on('mouseout', function (event, d) {
+      .on('mouseout', function () {
         d3.select(this)
           .style('opacity', 0.8)
           .attr('stroke-width', 2)
       })
-      .on('click', function (event, d) {
+      .on('click', function (d) {
         setSelectedNode(d)
       })
 
