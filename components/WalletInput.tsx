@@ -10,22 +10,10 @@ export default function WalletInput({ onSubmit, loading }: WalletInputProps) {
     const [address, setAddress] = useState('')
     const [isValid, setIsValid] = useState(true)
 
-    const validateSolanaAddress = (addr: string): boolean => {
-        // Basic Solana address validation (base58, 32-44 chars)
-        const base58Regex = /^[A-HJ-NP-Z1-9]{32,44}$/
-        return base58Regex.test(addr)
-    }
-
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
 
         if (!address.trim()) {
-            setIsValid(false)
-            return
-        }
-
-        // Basic client-side validation
-        if (!validateSolanaAddress(address.trim())) {
             setIsValid(false)
             return
         }
@@ -68,7 +56,7 @@ export default function WalletInput({ onSubmit, loading }: WalletInputProps) {
                         </div>
                     )}
                 </div>
-                
+
                 {!isValid && (
                     <p className="text-brand-red text-sm ml-1">
                         Please enter a valid Solana address (32-44 characters, base58 format)
