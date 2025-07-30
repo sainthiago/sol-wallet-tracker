@@ -27,7 +27,7 @@ export default function BubbleMap({ data }: BubbleMapProps) {
   }
 
   const formatAddress = (address: string): string => {
-    return `${address.slice(0, 4)}...${address.slice(-4)}`
+    return `${address?.slice(0, 4)}...${address?.slice(-4)}`
   }
 
   const copyToClipboard = async (address: string) => {
@@ -218,7 +218,7 @@ export default function BubbleMap({ data }: BubbleMapProps) {
             </div>
             <div>
               <p className="text-gray-400">SOL Volume</p>
-              <p className="text-white font-medium">{selectedNode.solAmount.toFixed(6)} SOL</p>
+              <p className="text-white font-medium">{selectedNode.solAmount?.toFixed(6)} SOL</p>
             </div>
           </div>
         </div>

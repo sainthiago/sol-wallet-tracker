@@ -4,7 +4,7 @@ import WalletInput from '@/components/WalletInput'
 import { WalletData as IWalletData } from '@/types/wallet'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 export default function WalletPage() {
   const router = useRouter()
@@ -12,8 +12,15 @@ export default function WalletPage() {
   const [walletData, setWalletData] = useState<IWalletData | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const fetchingRef = useRef<string | null>(null) // Track which address we're currently fetching
 
   const fetchWalletData = useCallback(async (walletAddress: string) => {
+    // Prevent duplicate calls for the same address
+    if (fetchingRef.current === walletAddress || loading) {
+      return
+    }
+
+    fetchingRef.current = walletAddress
     setLoading(true)
     setError(null)
     setWalletData(null)
@@ -36,8 +43,9 @@ export default function WalletPage() {
       setError(err instanceof Error ? err.message : 'An error occurred while fetching wallet data')
     } finally {
       setLoading(false)
+      fetchingRef.current = null
     }
-  }, [])
+  }, [loading])
 
   const handleWalletSubmit = useCallback(async (newAddress: string) => {
     // Navigate to the new address URL
@@ -49,13 +57,13 @@ export default function WalletPage() {
     if (router.isReady && address && typeof address === 'string') {
       fetchWalletData(address)
     }
-  }, [router.isReady, address, fetchWalletData])
+  }, [router.isReady, address]) // Removed fetchWalletData from dependencies to prevent re-runs
 
   // Generate dynamic page title and meta description
   const pageTitle = walletData 
-    ? `${walletData.address.slice(0, 8)}... | Solana Bubbles`
+    ? `${walletData?.address?.slice(0, 8)}... | Solana Bubbles`
     : address 
-    ? `${String(address).slice(0, 8)}... | Solana Bubbles`
+    ? `${String(address)?.slice(0, 8)}... | Solana Bubbles`
     : 'Solana Bubbles | Interactive Address Network Visualization'
   
   const pageDescription = walletData
