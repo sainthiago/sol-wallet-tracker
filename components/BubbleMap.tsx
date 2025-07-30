@@ -54,7 +54,7 @@ export default function BubbleMap({ data }: BubbleMapProps) {
     svg.selectAll('*').remove()
 
     const width = 800
-    const height = 400
+    const height = 300
     const margin = 40
 
     // Prepare data
@@ -187,39 +187,6 @@ export default function BubbleMap({ data }: BubbleMapProps) {
 
   return (
     <div className="w-full space-y-4">
-      {/* Visualization */}
-      <div className="glass-card p-4">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-white">Bubble Network</h3>
-          <div className="flex items-center space-x-4 text-xs text-gray-400">
-            <div className="flex items-center space-x-1">
-              <div className="w-3 h-3 bg-brand-green rounded-full"></div>
-              <span>High (≥1 SOL)</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <div className="w-3 h-3 bg-brand-orange rounded-full"></div>
-              <span>Medium (≥0.1 SOL)</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <div className="w-3 h-3 bg-brand-blue rounded-full"></div>
-              <span>Low (&gt;0 SOL)</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <div className="w-3 h-3 bg-gray-500 rounded-full"></div>
-              <span>Zero</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="w-full overflow-hidden rounded-lg bg-gray-900/30">
-          <svg ref={svgRef} className="w-full"></svg>
-        </div>
-
-        <p className="text-xs text-gray-500 mt-2 text-center">
-          Bubble size represents SOL volume • Click and drag to pan • Scroll to zoom
-        </p>
-      </div>
-
       {/* Selected Node Details */}
       {selectedNode && (
         <div className="glass-card p-4">
@@ -257,6 +224,39 @@ export default function BubbleMap({ data }: BubbleMapProps) {
           </div>
         </div>
       )}
+      {/* Visualization */}
+      <div className="glass-card p-4">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-semibold text-white">Bubble Network</h3>
+          <div className="flex items-center space-x-4 text-xs text-gray-400">
+            <div className="flex items-center space-x-1">
+              <div className="w-3 h-3 bg-brand-green rounded-full"></div>
+              <span>High (≥1 SOL)</span>
+            </div>
+            <div className="flex items-center space-x-1">
+              <div className="w-3 h-3 bg-brand-orange rounded-full"></div>
+              <span>Medium (≥0.1 SOL)</span>
+            </div>
+            <div className="flex items-center space-x-1">
+              <div className="w-3 h-3 bg-brand-blue rounded-full"></div>
+              <span>Low (&gt;0 SOL)</span>
+            </div>
+            <div className="flex items-center space-x-1">
+              <div className="w-3 h-3 bg-gray-500 rounded-full"></div>
+              <span>Zero</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="w-full overflow-hidden rounded-lg bg-gray-900/30">
+          <svg ref={svgRef} className="w-full"></svg>
+        </div>
+
+        <p className="text-xs text-gray-500 mt-2 text-center">
+          Bubble size represents SOL volume • Click and drag to pan • Scroll to zoom
+        </p>
+      </div>
+
     </div>
   )
 } 
