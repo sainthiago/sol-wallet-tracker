@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios'
 import { ApiResponse } from '@/types/wallet'
 
-const AGENT_BASE_URL = 'https://solana-wallet-tracker-agent.vercel.app'
+const AGENT_BASE_URL = 'https://solana-bubbles-agent.vercel.app'
 
 export default async function handler(
   req: NextApiRequest,
