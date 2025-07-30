@@ -52,10 +52,10 @@ export default function Home() {
         <link rel="apple-touch-icon" href="/favicon.svg" />
       </Head>
 
-      <main className="min-h-screen relative overflow-hidden">
+      <main className="min-h-screen relative overflow-hidden bg-gray-900 ">
         {/* Homescreen */}
         {showHomescreen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 transition-all duration-1000">
+          <div className="fixed inset-0 z-50 flex items-center justify-center transition-all duration-1000">
             <div className="text-center">
               <div 
                 onClick={handleHomescreenClick}
