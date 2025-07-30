@@ -10,7 +10,7 @@ interface BubbleMapProps {
 interface BubbleNode extends d3.SimulationNodeDatum {
   id: string
   address: string
-  solAmount: number
+  solAmount: number // Always a valid number, never undefined
   label: string
   isMain?: boolean
 }
@@ -23,11 +23,13 @@ export default function BubbleMap({ data }: BubbleMapProps) {
   const parseSolAmount = (solVolume: string | undefined): number => {
     if (!solVolume) return 0.001 // Minimum size for missing data
     const match = solVolume.match(/(\d+\.?\d*)\s*SOL/)
-    return match ? Math.max(parseFloat(match[1]), 0.001) : 0.001 // Minimum size for zero amounts
+    const amount = match ? parseFloat(match[1]) : 0
+    return Math.max(amount, 0.001) // Ensure minimum size and never NaN
   }
 
-  const formatAddress = (address: string): string => {
-    return `${address?.slice(0, 4)}...${address?.slice(-4)}`
+  const formatAddress = (address: string | undefined): string => {
+    if (!address) return 'Unknown'
+    return `${address.slice(0, 4)}...${address.slice(-4)}`
   }
 
   const copyToClipboard = async (address: string) => {
@@ -122,19 +124,37 @@ export default function BubbleMap({ data }: BubbleMapProps) {
       .attr('stroke', '#1F2937')
       .attr('stroke-width', 2)
       .style('opacity', 0.8)
-      .on('mouseover', function (d) {
+      .on('mouseover', function(event, d) {
         d3.select(this)
           .style('opacity', 1)
           .attr('stroke-width', 3)
-        setSelectedNode(d)
+        // Extract clean data for mouseover as well
+        const nodeData = {
+          id: d.id,
+          address: d.address,
+          solAmount: d.solAmount,
+          label: d.label,
+          isMain: d.isMain
+        }
+        setSelectedNode(nodeData)
       })
-      .on('mouseout', function () {
+      .on('mouseout', function(event, d) {
         d3.select(this)
           .style('opacity', 0.8)
           .attr('stroke-width', 2)
       })
-      .on('click', function (d) {
-        setSelectedNode(d)
+      .on('click', function(event, d) {
+        console.log('Clicked node data:', d)
+        // Extract only the essential data to avoid D3 simulation interference
+        const nodeData = {
+          id: d.id,
+          address: d.address,
+          solAmount: d.solAmount,
+          label: d.label,
+          isMain: d.isMain
+        }
+        console.log('Setting selectedNode to:', nodeData)
+        setSelectedNode(nodeData)
       })
 
     // Add labels for main node and larger bubbles
@@ -184,6 +204,8 @@ export default function BubbleMap({ data }: BubbleMapProps) {
     )
   }
 
+  console.log({ selectedNode })
+
   return (
     <div className="w-full space-y-4">
       {/* Selected Node Details */}
@@ -218,7 +240,7 @@ export default function BubbleMap({ data }: BubbleMapProps) {
             </div>
             <div>
               <p className="text-gray-400">SOL Volume</p>
-              <p className="text-white font-medium">{selectedNode.solAmount?.toFixed(6)} SOL</p>
+              <p className="text-white font-medium">{(selectedNode.solAmount || 0).toFixed(6)} SOL</p>
             </div>
           </div>
         </div>
